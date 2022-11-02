@@ -60,3 +60,60 @@ with open("main.py","r+") as f:
         if s=="":
             break
         print(s,end="")
+
+#############################################
+
+with open("test.txt","r+") as f:
+    while True:
+        s =f.readline()
+        if s =='':
+            break
+        print(s,end='')
+        
+        
+with open("main.py","r+") as f:
+    for line in f:
+        print(line,end="")
+
+with open("main.py","r+") as f:
+    l =list(f)
+    print(l)
+
+###########################
+
+with open("test.csv","w+") as f:
+    f.write('ali,123\n')
+    f.write('ali,123\n')
+    f.write('ali,123\n')
+
+d=dict()
+
+with open("test.csv","r+") as f:
+    for line in f:
+        if line.strip()=="":
+            continue
+        l = line.split(",")
+        d[l[0]]=l[1].strip()
+        print(d)
+
+
+#######################
+
+def writeCSV(path,formatType,num_cols=None,header =False):
+    with open(path,formatType) as f:
+        f.write("name,IDno,lesson,grade\n")
+        f.write("harun,1,cpp,12\n")
+        f.write("kamil,3,dynamic,66\n")
+
+    print()
+
+def readCSV(path,formatType,num_cols=None,header =False):
+    with open(path,formatType,encoding="utf-8") as f:
+        if header:
+            headList =f.readline()[:-1].split(",")
+            
+if __name__ =="__main__":
+    writeCSV("student.csv","w+")
+    
+    l,h=readCSV("student.csv","r+",{3:int, 3 :float})
+    
