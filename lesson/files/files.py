@@ -111,9 +111,41 @@ def readCSV(path,formatType,num_cols=None,header =False):
     with open(path,formatType,encoding="utf-8") as f:
         if header:
             headList =f.readline()[:-1].split(",")
+        
+        l=[]
+        for line in f:
+            line =line[:-1].split(",")
+            
+            if line =="":
+                continue
+            
+            if num_cols :
+                for n, con_type in num_cols.items():
+                    line[n] = con_type(line[n])
+            
+            l.append(line)
+        
             
 if __name__ =="__main__":
     writeCSV("student.csv","w+")
     
     l,h=readCSV("student.csv","r+",{3:int, 3 :float})
+############################################
+
+# Errors
+
+def foo (a):
     
+    print("foo beign")
+    if not isinstance(a,int):
+        raise TypeError
+    
+    if a<0:
+        raise ValueError
+    
+try:
+    foo(-1)
+except ValueError:
+    print("value is not okey")
+except TypeError:
+    print("number is not integer")
